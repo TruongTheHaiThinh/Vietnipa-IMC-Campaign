@@ -198,6 +198,22 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.2); opacity: 0; transition: 0.3s; z-index: 1000; pointer-events: none;
     }
     .scroll-top.visible { opacity: 1; pointer-events: auto; }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .nav-list { display: none; }
+      .article-main { padding: 30px 15px; }
+      .article-title { font-size: 30px; }
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 15px; }
+      .page-wrapper { border: none; }
+      .header-top { flex-direction: column; gap: 15px; }
+      .brand-info-box { padding: 15px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .article-chapeau { font-size: 18px; }
+      .article-content { font-size: 17px; }
+    }
   </style>
 </head>
 <body>

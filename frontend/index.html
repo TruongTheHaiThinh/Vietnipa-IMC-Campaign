@@ -166,6 +166,23 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.2); opacity: 0; transition: 0.3s; z-index: 1000; pointer-events: none;
     }
     .scroll-top.visible { opacity: 1; pointer-events: auto; }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .hero-news, .main-grid { grid-template-columns: 1fr; }
+      .hero-side { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+      .nav-list { display: none; }
+      .nav-more { display: block; }
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 15px; }
+      .page-wrapper { border: none; }
+      .header-top { flex-direction: column; gap: 15px; }
+      .hero-main img { height: 250px; }
+      .hero-main h1 { font-size: 24px; }
+      .hero-side { grid-template-columns: 1fr; }
+      .article-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
