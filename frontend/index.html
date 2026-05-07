@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Báo điện tử Tiền Phong - Tin tức mới nhất</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Slab:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/primeicons/primeicons.css">
+  <style>
+    :root {
+      --tp-red: #ed1c24;
+      --tp-text: #333333;
+      --tp-text-light: #555555;
+      --tp-border: #eeeeee;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Roboto', sans-serif; background: #fff; color: #333; line-height: 1.6; }
+    h1, h2, h3, h4 { font-family: 'Roboto Slab', serif; font-weight: 900; color: #000; line-height: 1.3; }
+    a { text-decoration: none; color: inherit; transition: 0.1s; }
+    a:hover, a:hover h1, a:hover h2, a:hover h3, a:hover h4 { color: var(--tp-red) !important; }
+
+    /* ── PAGE WRAPPER ── */
+    .page-wrapper {
+      max-width: 1300px;
+      margin: 0 auto;
+      background: #fff;
+      border-left: 1px solid #eee;
+      border-right: 1px solid #eee;
+      min-height: 100vh;
+      box-shadow: 0 0 25px rgba(0,0,0,0.07);
+    }
+
+    .container { width: 100%; padding: 0; }
+    .content-padding { padding: 0 20px; }
+
+    /* ── TOP UTILITY ── */
+    .top-utility {
+      background: #f4f4f4;
+      border-bottom: 1px solid #eee;
+      font-size: 11px;
+      color: #666;
+      height: 35px;
+      display: flex;
+      align-items: center;
+    }
+    .utility-inner { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 0 20px; }
+    .utility-center { display: flex; gap: 15px; font-weight: 700; }
+    .utility-center span { cursor: pointer; }
+    .utility-center span:hover { color: var(--tp-red); }
+    .utility-right { display: flex; gap: 10px; font-size: 14px; }
+
+    /* ── MAIN HEADER ── */
+    .main-header { padding: 25px 0; background: var(--white); }
+    .header-inner { display: flex; justify-content: center; align-items: center; position: relative; padding: 0 20px; }
+    .logo-box { text-align: center; }
+    .logo-box img { height: 90px; }
+    .header-actions { position: absolute; right: 20px; display: flex; gap: 20px; font-size: 24px; color: #666; }
+
+    /* ── NAVIGATION ── */
+    .nav-sticky {
+      background: var(--white);
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-inner { display: flex; align-items: center; height: 45px; }
+    .nav-home-btn {
+      background: var(--tp-red);
+      color: white;
+      height: 32px;
+      width: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 6px;
+      margin-left: 10px;
+      flex-shrink: 0;
+    }
+    .nav-home-btn svg { width: 20px; height: 20px; fill: white; }
+    
+    .nav-list { display: flex; list-style: none; overflow: hidden; height: 100%; flex: 1; padding-left: 10px; }
+    .nav-list li a {
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      height: 100%;
+      font-size: 14px;
+      font-weight: 700;
+      color: #333;
+      white-space: nowrap;
+    }
+    .nav-list li a:hover { color: var(--tp-red); }
+    .nav-more { width: 50px; text-align: center; font-size: 20px; color: #666; cursor: pointer; }
+
+    /* ── HERO ── */
+    .hero-news { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin: 20px 0; }
+    .hero-main img { width: 100%; height: 500px; object-fit: cover; border-radius: 4px; }
+    .hero-main h1 { font-size: 32px; margin: 15px 0; line-height: 1.2; }
+    .hero-main p { color: #555; font-size: 16px; line-height: 1.5; }
+    .hero-side { display: flex; flex-direction: column; gap: 12px; }
+    .side-item { display: flex; gap: 12px; padding-bottom: 10px; border-bottom: 1px solid #eee; }
+    .side-item:last-child { border-bottom: none; }
+    .side-item img { width: 100px; height: 65px; object-fit: cover; border-radius: 3px; flex-shrink: 0; }
+    .side-item h3 { font-size: 14px; font-weight: 700; line-height: 1.4; font-family: 'Roboto', sans-serif; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
+
+    /* ── GRID ── */
+    .main-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; margin-top: 30px; }
+    .sec-header { border-bottom: 2px solid var(--tp-red); margin-bottom: 20px; }
+    .sec-header h2 { display: inline-block; background: var(--tp-red); color: white; padding: 4px 12px; font-size: 16px; text-transform: uppercase; }
+    .article-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+    .card img { width: 100%; height: 180px; object-fit: cover; border-radius: 4px; margin-bottom: 10px; }
+    .card h4 { font-size: 17px; line-height: 1.4; }
+
+    /* ── SIDEBAR ── */
+    aside { border-left: 1px solid #eee; padding-left: 20px; }
+    .sidebar-title { font-size: 18px; font-weight: 900; text-transform: uppercase; margin-bottom: 15px; border-bottom: 3px solid #000; padding-bottom: 5px; }
+    .hot-item { display: flex; gap: 15px; padding: 12px 0; border-bottom: 1px solid #eee; }
+    .hot-num { color: var(--tp-red); font-size: 28px; font-weight: 900; opacity: 0.2; min-width: 40px; }
+    .hot-text { font-size: 15px; font-weight: 700; line-height: 1.4; font-family: 'Roboto', sans-serif; }
+
+    /* ── FOOTER REVAMP ── */
+    footer { background: var(--white); border-top: 1px solid #ddd; padding: 50px 0 30px; margin-top: 60px; font-size: 14px; color: #333; }
+    .footer-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 35px; }
+    .footer-logo { height: 75px; }
+    .footer-sub-logos { display: flex; align-items: center; gap: 30px; }
+    .footer-sub-logos img { height: 50px; object-fit: contain; }
+
+    .footer-menu { display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; border-bottom: 1px solid #eee; padding-bottom: 35px; margin-bottom: 35px; }
+    .footer-col h4 { font-size: 15px; font-weight: 700; text-transform: uppercase; margin-bottom: 15px; color: #000; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; color: #555; cursor: pointer; font-size: 14px; }
+    .footer-col li:hover { color: var(--tp-red); }
+
+    .footer-info-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr; gap: 25px; border-bottom: 1px solid #eee; padding-bottom: 35px; margin-bottom: 35px; }
+    .info-col h5 { font-size: 13px; font-weight: 700; margin-bottom: 15px; text-transform: uppercase; }
+    .info-col p { color: #555; margin-bottom: 6px; line-height: 1.6; font-size: 13px; }
+    
+    /* Social Icons Circle Style */
+    .social-links { display: flex; gap: 12px; margin-top: 12px; }
+    .social-icon { 
+      width: 32px; height: 32px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-size: 16px; transition: 0.2s; 
+    }
+    .si-fb { background: #3b5998; }
+    .si-yt { background: #ff0000; }
+    .si-tt { background: #000000; }
+    .si-zl { background: #0068ff; }
+    .si-gn { background: #f4b400; }
+    .social-icon:hover { transform: translateY(-3px); box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+
+    .footer-bottom { display: flex; justify-content: space-between; align-items: flex-start; color: #666; line-height: 1.6; font-size: 13px; }
+    .footer-bottom b { color: #333; }
+    .btn-reader-news { 
+      background: var(--tp-red); color: white; padding: 10px 20px; border-radius: 5px; font-weight: 700; 
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 15px; transition: 0.2s; 
+      font-size: 14px;
+    }
+    .btn-reader-news:hover { background: #c1161b; transform: scale(1.05); }
+
+    .scroll-top {
+      position: fixed; bottom: 30px; right: 30px; width: 45px; height: 45px; background: var(--tp-red); color: white;
+      border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2); opacity: 0; transition: 0.3s; z-index: 1000; pointer-events: none;
+    }
+    .scroll-top.visible { opacity: 1; pointer-events: auto; }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <div class="top-utility">
+      <div class="utility-inner">
+        <div id="current-date">Thứ Sáu, ngày 08/05/2026</div>
+        <div class="utility-center">
+          <span>HOTLINE: 0865015015</span>
+          <span>TIỀN PHONG NHẬT BÁO</span>
+          <span>SINH VIÊN VIỆT NAM</span>
+          <span>HOA HỌC TRÒ</span>
+          <span>TÒA SOẠN</span>
+          <span>QUẢNG CÁO</span>
+        </div>
+        <div class="utility-right">
+          <i class="pi pi-facebook"></i> <i class="pi pi-youtube"></i>
+        </div>
+      </div>
+    </div>
+
+    <header class="main-header">
+      <div class="header-inner">
+        <div class="logo-box">
+          <a href="/"><img src="image/tien-phong-logo.png" alt="Tiền Phong Logo"></a>
+        </div>
+        <div class="header-actions">
+          <i class="pi pi-search"></i> <i class="pi pi-user"></i>
+        </div>
+      </div>
+    </header>
+
+    <nav class="nav-sticky">
+      <div class="nav-inner">
+        <a href="/" class="nav-home-btn">
+          <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg>
+        </a>
+        <ul class="nav-list">
+          <li><a href="#">Xã hội</a></li>
+          <li><a href="#">Kinh tế</a></li>
+          <li><a href="#">Sóng xanh</a></li>
+          <li><a href="#">Địa ốc</a></li>
+          <li><a href="#">Sức khỏe</a></li>
+          <li><a href="#">Thế giới</a></li>
+          <li><a href="#">Giới trẻ</a></li>
+          <li><a href="#">Pháp luật</a></li>
+          <li><a href="#">Thể thao</a></li>
+          <li><a href="#">Người lính</a></li>
+          <li><a href="#">Xe</a></li>
+          <li><a href="#">Văn hóa</a></li>
+          <li><a href="#">Giải trí</a></li>
+          <li><a href="#">Giáo dục</a></li>
+          <li><a href="#">Khoa học</a></li>
+          <li><a href="#">Hoa hậu</a></li>
+          <li><a href="#">Video</a></li>
+        </ul>
+        <div class="nav-more"><i class="pi pi-bars"></i></div>
+      </div>
+    </nav>
+
+    <main class="container content-padding">
+      <div class="main-grid">
+        <section>
+          <div id="hero-news-container"></div>
+          <div class="sec-header"><h2>Mới nhất</h2></div>
+          <div class="article-grid" id="latest-grid"></div>
+        </section>
+        <aside>
+          <div class="sidebar-title">Tin nóng</div>
+          <div class="hot-list" id="hot-news-list"></div>
+        </aside>
+      </div>
+    </main>
+
+    <footer id="footer">
+      <div class="container content-padding">
+        <div class="footer-top">
+          <img src="image/tien-phong-logo.png" class="footer-logo" alt="Tiền Phong">
+          <div class="footer-sub-logos">
+            <img src="image/logo-sinh-vien.jpg" alt="Sinh viên Việt Nam">
+            <img src="image/logo-hoa-hoc-tro.jpg" alt="Hoa học trò">
+          </div>
+        </div>
+        <div class="footer-menu">
+          <div class="footer-col"><h4>Video</h4><ul><li>Xã hội</li><li>Xe</li><li>Nhịp sống Thủ đô</li></ul></div>
+          <div class="footer-col"><h4>Nhật báo</h4><ul><li>Kinh tế</li><li>Văn hóa</li><li>Nhịp sống phương Nam</li></ul></div>
+          <div class="footer-col"><h4>Ảnh</h4><ul><li>Địa ốc</li><li>Giải trí</li></ul></div>
+          <div class="footer-col"><h4>Podcast</h4><ul><li>Sống xanh</li><li>Giáo dục</li></ul></div>
+          <div class="footer-col"><h4>Longform</h4><ul><li>Sức khỏe</li><li>Khoa học</li></ul></div>
+          <div class="footer-col"><h4>Infographics</h4><ul><li>Giới trẻ</li><li>Hoa hậu</li></ul></div>
+        </div>
+        <div class="footer-info-grid">
+          <div class="info-col"><h5>Tòa soạn</h5><p><i class="pi pi-map-marker"></i> 15 Hồ Xuân Hương, Hà Nội</p><p><i class="pi pi-phone"></i> 024.39431250</p></div>
+          <div class="info-col"><h5>Liên hệ quảng cáo</h5><p><i class="pi pi-phone"></i> 0909559988</p><p><i class="pi pi-envelope"></i> booking@baotienphong.com.vn</p></div>
+          <div class="info-col"><h5>Đặt mua báo in</h5><p><i class="pi pi-phone"></i> (024)39439664</p><p><i class="pi pi-phone"></i> 0908988666</p></div>
+          <div class="info-col">
+            <h5>Theo dõi báo trên</h5>
+            <div class="social-links">
+              <a href="#" class="social-icon si-fb"><i class="pi pi-facebook"></i></a>
+              <a href="#" class="social-icon si-yt"><i class="pi pi-youtube"></i></a>
+              <a href="#" class="social-icon si-tt"><i class="pi pi-twitter"></i></a>
+              <a href="#" class="social-icon si-zl"><b style="font-size: 10px;">Zalo</b></a>
+            </div>
+          </div>
+          <div class="info-col"><h5 style="color:var(--tp-red); cursor:pointer;">Chính sách bảo mật</h5></div>
+        </div>
+        <div class="footer-bottom">
+          <div>
+            <p>Cơ quan chủ quản: <b>Trung ương Đoàn TNCS Hồ Chí Minh</b></p>
+            <p>Tổng Biên tập: <b>PHÙNG CÔNG SƯỞNG</b></p>
+            <a href="#" class="btn-reader-news">BẠN ĐỌC LÀM BÁO <i class="pi pi-chevron-right" style="font-size: 10px;"></i></a>
+          </div>
+          <div style="text-align: right;">
+            <p>Giấy phép số <b>76/GP-BTTTT</b>, cấp ngày <b>26/02/2020</b></p>
+            <p>&copy; Bản quyền thuộc báo <b>Tiền Phong</b></p>
+            <p>Thiết kế và phát triển bởi <b>Hemera Media</b></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <div class="scroll-top" id="scrollTopBtn"><i class="pi pi-arrow-up"></i></div>
+
+  <script>
+    const API_BASE = '/api';
+    let renderedIds = new Set();
+    let renderedTitles = new Set();
+
+    async function loadData() {
+      try {
+        const featRes = await fetch(`${API_BASE}/featured`);
+        const featData = await featRes.json();
+        const res = await fetch(`${API_BASE}/articles?limit=50`);
+        const data = await res.json();
+        let articles = data.articles;
+
+        if (featData && featData.id) {
+          renderedIds.add(featData.id);
+          renderedTitles.add(featData.title);
+          const heroSides = getUnique(articles, 6);
+          renderHero([featData, ...heroSides]);
+        } else if (articles && articles.length > 0) {
+          renderHero(getUnique(articles, 7));
+        }
+
+        renderGrid(getUnique(articles, 12), 'latest-grid');
+        renderSidebar(getUnique(articles, 10), 'hot-news-list');
+      } catch (err) { console.error('API Error:', err); }
+    }
+
+    function getUnique(source, count) {
+      let result = [];
+      for (let a of source) {
+        if (!renderedIds.has(a.id) && !renderedTitles.has(a.title)) {
+          result.push(a);
+          renderedIds.add(a.id);
+          renderedTitles.add(a.title);
+        }
+        if (result.length >= count) break;
+      }
+      return result;
+    }
+
+    function renderHero(list) {
+      const main = list[0];
+      const sides = list.slice(1);
+      const container = document.getElementById('hero-news-container');
+      const mainLink = (main.id === 50) ? `/${main.slug || 'article'}-post${main.id}.tpo` : (main.source_url || '#');
+      container.innerHTML = `
+        <div class="hero-news">
+          <div class="hero-main">
+            <a href="${mainLink}">
+              <img src="${main.image_url.startsWith('http') ? main.image_url : '/' + main.image_url}" alt="${main.title}">
+              <h1>${main.title}</h1>
+              <p>${main.chapeau || main.summary}</p>
+            </a>
+          </div>
+          <div class="hero-side">
+            ${sides.map(a => `
+              <article class="side-item">
+                <a href="${a.source_url}" target="_blank"><img src="${a.image_url.startsWith('http') ? a.image_url : '/' + a.image_url}"></a>
+                <a href="${a.source_url}" target="_blank"><h3>${a.title}</h3></a>
+              </article>
+            `).join('')}
+          </div>
+        </div>`;
+    }
+
+    function renderGrid(list, containerId) {
+      const grid = document.getElementById(containerId);
+      grid.innerHTML = list.map(a => `
+        <article class="card">
+          <a href="${a.source_url}" target="_blank">
+            <img src="${a.image_url.startsWith('http') ? a.image_url : '/' + a.image_url}" alt="${a.title}">
+            <h4>${a.title}</h4>
+          </a>
+        </article>`).join('');
+    }
+
+    function renderSidebar(list, containerId) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = list.map((a, i) => `
+        <article class="hot-item">
+          <span class="hot-num">${i + 1}</span>
+          <a href="${a.source_url}" target="_blank" class="hot-text">${a.title}</a>
+        </article>`).join('');
+    }
+
+    const now = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: '2-digit', day: '2-digit' };
+    document.getElementById('current-date').innerText = now.toLocaleDateString('vi-VN', options);
+
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    window.onscroll = function() {
+      if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) { scrollBtn.classList.add('visible'); }
+      else { scrollBtn.classList.remove('visible'); }
+    };
+    scrollBtn.onclick = function() { window.scrollTo({ top: 0, behavior: 'smooth' }); };
+
+    loadData();
+  </script>
+</body>
+</html>
